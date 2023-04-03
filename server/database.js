@@ -10,7 +10,7 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
   // const sql= "SELECT count(*) from identity.user" ;
-  const sql= " SELECT name, email, createdAt, active FROM identity.user WHERE `createdAt`  >= DATE_SUB(CURDATE(),  INTERVAL 1 month) AND active='1' " ;
+  const sql= " SELECT count(*) as business FROM `squadly-business`.business;" ;
   
   con.query(sql, function (err1, result) {
     if (err1) throw err1;

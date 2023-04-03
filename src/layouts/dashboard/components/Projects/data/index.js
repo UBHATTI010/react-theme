@@ -63,7 +63,7 @@ export default function data() {
   return {
     columns: [
       { Header: "Businesses", accessor: "companies", width: "45%", align: "left" },
-      { Header: "Active Members", accessor: "members", width: "30%", align: "left" },
+      { Header: "Active Members", accessor: "members", width: "30%", align: "center" },
       { Header: "budget", accessor: "budget", align: "center" },
       // { Header: "completion", accessor: "completion", align: "center" },
     ],

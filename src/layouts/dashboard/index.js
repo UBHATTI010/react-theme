@@ -36,14 +36,17 @@ import Projects from "layouts/dashboard/components/Projects";
 // import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 import React, { useState, useEffect } from "react";
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-  const [activeUsers, setActiveUsers] = useState(0);
+  const [activeUsers, setActiveUsers] = useState(100);
+  const [totalJobs, setTotalJobs] = useState(100);
+  const [totalUsers, setTotalUsers] = useState(100);
+  const [totalBusiness, setTotalBusiness] = useState(100);
 
-  // START - add api calling here
+
+  // START - /active/users calling here
   const requestOptions = {
     method: "POST",
     mode: "cors",
@@ -52,14 +55,66 @@ function Dashboard() {
     fetch("http://127.0.0.1:5000/active/users", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log("data: ", data);
+          console.log("data: ", data[0]["count(*)"]);
           setActiveUsers(data[0]["count(*)"])
         })
         .catch((err) => {
           console.log("err.message: ", err.message);
         });
-  }, []);
-  // END - add api calling here
+   }, []); 
+  // END - /active/users calling here
+
+  // START - /total/jobs calling here
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/total/jobs", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data: ", data[0]["count(*)"]);
+          setTotalJobs(data[0]["count(*)"])
+        })
+        .catch((err) => {
+          console.log("err.message: ", err.message);
+        });
+   }, []);
+
+  // END - /total/jobs calling here
+
+
+   // START - /total/jobs calling here
+
+   useEffect(() => {
+    fetch("http://127.0.0.1:5000/total/users", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data: ", data[0]["count(*)"]);
+          setTotalUsers(data[0]["count(*)"])
+        })
+        .catch((err) => {
+          console.log("err.message: ", err.message);
+        });
+   }, []);
+
+  // END - /total/jobs calling here
+
+
+ // START - /total/jobs calling here
+
+ useEffect(() => {
+  fetch("http://127.0.0.1:5000/total/business", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("data: ", data[0]["count(*)"]);
+        setTotalBusiness(data[0]["count(*)"])
+      })
+      .catch((err) => {
+        console.log("err.message: ", err.message);
+      });
+ }, []);
+
+// END - /total/jobs calling here 
+
+
 
   return (
     <DashboardLayout>
@@ -72,11 +127,11 @@ function Dashboard() {
                 color="dark"
                 icon="weekend"
                 title="Total Jobs(30 Days)"
-                count={281}
+                count={totalJobs}
                 percentage={{
-                  // color: "success",
-                  // amount: "+55%",
-                  label: "Last 30 Days",
+                   color: "success",
+                  amount: "",
+                  label: "Just Updated",
                 }}
               />
             </MDBox>
@@ -85,12 +140,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Total Users"
-                count="2,300"
+                title=" Users"
+                count={totalUsers}
                 percentage={{
-                  // color: "success",
-                  // amount: "+3%",
-                  label: " Last 30 Days",
+                  color: "success",
+                  amount: "",
+                  label: "Total Users",
                 }}
               />
             </MDBox>
@@ -101,11 +156,11 @@ function Dashboard() {
                 color="success"
                 icon="store"
                 title="Business"
-                count="34k"
+                count={totalBusiness}
                 percentage={{
-                  // color: "success",
-                  // amount: "+1%",
-                  label: "Last Month",
+                   color: "success",
+                  amount: "",
+                  label: "Total Business",
                 }}
               />
             </MDBox>
@@ -116,7 +171,7 @@ function Dashboard() {
                 color="primary"
                 icon="person_add"
                 title="Active Users"
-                count="+4"
+                count= {activeUsers}
                 percentage={{
                   color: "success",
                   amount: "",

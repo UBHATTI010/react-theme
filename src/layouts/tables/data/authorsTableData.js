@@ -50,8 +50,8 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Business", accessor: "author", width: "45%", align: "left" },
-      { Header: "Subscription ", accessor: "function", align: "left " },
+      { Header: "Business", accessor: "author", width: "40%", align: "left" },
+      { Header: "Subscription ", accessor: "function", align: "center " },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "employed", accessor: "employed", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
@@ -116,7 +116,7 @@ export default function data() {
         ),
       },
       {
-        author: <Author image={team3} name="IT" email="Null" />,
+        author: <Author image={team3} name="IT" email="" />,
         function: <Job title="Null" />,
         status: (
           <MDBox ml={-1}>
@@ -135,7 +135,7 @@ export default function data() {
         ),
       },
       {
-        author: <Author image={team3} name="GreySpace" email="Null" />,
+        author: <Author image={team3} name="GreySpace" email="" />,
         function: <Job title="Null" />,
         status: (
           <MDBox ml={-1}>
@@ -154,7 +154,7 @@ export default function data() {
         ),
       },
       {
-        author: <Author image={team4} name="onboarding-test-user-business" email="Null" />,
+        author: <Author image={team4} name="onboarding-test-user-business" email="" />,
         function: <Job title="Null" />,
         status: (
           <MDBox ml={-1}>
