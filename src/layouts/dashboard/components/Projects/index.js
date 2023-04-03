@@ -63,8 +63,8 @@ function Projects() {
     <Card>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
-          <MDTypography variant="h6" gutterBottom>
-            Projects
+          <MDTypography variant="h5" gutterBottom>
+          <img src="https://i.ibb.co/3fsmJgJ/b2.png" width= "26px" height="30px"/>     Businesses
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon

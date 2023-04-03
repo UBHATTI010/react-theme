@@ -33,19 +33,34 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+// import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
+import React, { useEffect } from "react";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-
+  // START - add api calling here
+  const requestOptions = {
+    method: "POST",
+    mode: "cors",
+  };
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/active/users", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data: ", data);
+        })
+        .catch((err) => {
+          console.log("err.message: ", err.message);
+        });
+  }, []);
+  // END - add api calling here
 
   return (
-
     <DashboardLayout>
       <DashboardNavbar />
-
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
@@ -53,12 +68,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
+                title="Total Jobs(30 Days)"
                 count={281}
                 percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
+                  // color: "success",
+                  // amount: "+55%",
+                  label: "Last 30 Days",
                 }}
               />
             </MDBox>
@@ -67,12 +82,12 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
+                title="Total Users"
                 count="2,300"
                 percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
+                  // color: "success",
+                  // amount: "+3%",
+                  label: " Last 30 Days",
                 }}
               />
             </MDBox>
@@ -82,12 +97,12 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
+                title="Business"
                 count="34k"
                 percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
+                  // color: "success",
+                  // amount: "+1%",
+                  label: "Last Month",
                 }}
               />
             </MDBox>
@@ -97,8 +112,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Followers"
-                count="+91"
+                title="Active Users"
+                count="+4"
                 percentage={{
                   color: "success",
                   amount: "",
@@ -155,14 +170,13 @@ function Dashboard() {
               <Projects />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
+              {/* <OrdersOverview /> */}
             </Grid>
           </Grid>
         </MDBox>
       </MDBox>
       <Footer />
     </DashboardLayout>
-
   );
 }
 
