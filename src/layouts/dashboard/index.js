@@ -35,12 +35,14 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 // import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+  const [activeUsers, setActiveUsers] = useState(0);
+
   // START - add api calling here
   const requestOptions = {
     method: "POST",
@@ -51,6 +53,7 @@ function Dashboard() {
         .then((response) => response.json())
         .then((data) => {
           console.log("data: ", data);
+          setActiveUsers(data[0]["count(*)"])
         })
         .catch((err) => {
           console.log("err.message: ", err.message);
